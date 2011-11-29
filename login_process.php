@@ -18,18 +18,30 @@ else
     $pass=md5($password);
      
     $query=mysql_query("SELECT * FROM registration where
-    username='$user' AND
-    password='$pass' ");
-     
-    $count=mysql_num_rows($query);
-    if($count==1)
+    username='$user' AND password='$pass' ");
+    $array = mysql_fetch_assoc($query);
+
+    if ($array['access_level'] == 'ban')
     {
-        $_SESSION['username'] = $username;
-        header("location: index.php");
+        echo ("<h1>Sorry, but you have been banned for some reasons. <br> 
+        Contact the site administrator to get more information.</h1>");
     }
+    
     else
-    {
-        echo "Username or password is incorrect.";
+    {     
+        $count=mysql_num_rows($query);
+    
+    
+        if ($count==1)
+        {
+            $_SESSION['username'] = $username;
+            header("location: index.php");
+        }
+        
+        else
+        {
+            echo "Username or password is incorrect.";
+        }
     }
 }
 ?>
