@@ -40,7 +40,7 @@ if(isset($_SESSION['username']))
         
         while ($listarray = mysql_fetch_array ($querylist));
          
-        echo ("<p><input name='submit' type='submit' value='Ban / Unban'></p>
+        echo ("<p><input name='submit' type='submit' value='Ban  Unban'></p>
         </form> ");
    
     }
