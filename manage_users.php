@@ -14,14 +14,13 @@ if(isset($_SESSION['username']))
     if ($userarray['access_level'] == 'boss')
     {
     
-    
         $querylist = mysql_query ("SELECT * FROM registration WHERE
         access_level != 'boss' OR access_level is NULL");
         $listarray = mysql_fetch_assoc ($querylist);
 
-    echo '<h2>User list:</h2>';
-    
-    echo ("<form action='ban_user.php' method='post'>");
+        echo '<h2>User list:</h2>';
+        
+        echo ("<form action='ban_user.php' method='post'>");
     
         do
         {
@@ -41,8 +40,8 @@ if(isset($_SESSION['username']))
         
         while ($listarray = mysql_fetch_array ($querylist));
          
-    echo ("<p><input name='submit' type='submit' value='Ban / Unban'></p>
-    </form> ");
+        echo ("<p><input name='submit' type='submit' value='Ban / Unban'></p>
+        </form> ");
    
     }
     
