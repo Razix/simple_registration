@@ -14,6 +14,7 @@ if(isset($_SESSION['username']))
     if ($userarray['access_level'] == 'boss')
     {
     
+    
         $querylist = mysql_query ("SELECT * FROM registration WHERE
         access_level != 'boss' OR access_level is NULL");
         $listarray = mysql_fetch_assoc ($querylist);
