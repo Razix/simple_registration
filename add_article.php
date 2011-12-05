@@ -25,7 +25,8 @@ if(isset($_SESSION['username']))
 
             if (isset($_POST['text'])) 
             {
-                $text = $_POST['text']; 
+                $arttext = $_POST['text'];
+                $text = wordwrap($arttext, 100, "\n", true); 
                 if ($text == '') 
                 {
                     unset($text);
@@ -35,7 +36,8 @@ if(isset($_SESSION['username']))
 if (isset($username) && isset($title) && isset($text))
 {
 
-$action = mysql_query ("INSERT INTO articles (author,title,text) VALUES ('$username','$title','$text')");
+    $action = mysql_query ("INSERT INTO articles (author,title,text) 
+    VALUES ('$username','$title','$text')");
 
     if ($action =='true') 
     {
@@ -46,11 +48,12 @@ $action = mysql_query ("INSERT INTO articles (author,title,text) VALUES ('$usern
     else 
     {
         echo "<h1>You've got a problem.</h1>";
+        header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
     }
 }
 
 else 
 {
     echo "<h1>You have to fill in all fields.</h1>";
-    header("Refresh: 3;url=new_article.php");
+    header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
 }

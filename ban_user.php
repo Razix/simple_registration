@@ -20,7 +20,6 @@ if(isset($_SESSION['username']))
         }
 
         if (isset($id))
-
         {
 
             $querylist = mysql_query ("SELECT access_level FROM registration
@@ -48,13 +47,15 @@ if(isset($_SESSION['username']))
                 {
                     echo "<h1>Oops! Nothing has happened for unknown 
                     reasons.</h1>";
+                    header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
                 }
         }
 
         else 
         {
             echo "<h1>You must choose somebody from the list before pressing
-             \"Ban / Unban button\".</h1>"	;
+             \"Ban / Unban button\".</h1>";
+            header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
         }
     }
     

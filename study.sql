@@ -2,10 +2,10 @@
 -- version 3.4.3.1
 -- http://www.phpmyadmin.net
 --
--- РҐРѕСЃС‚: localhost
--- Р’СЂРµРјСЏ СЃРѕР·РґР°РЅРёСЏ: РќРѕСЏ 08 2011 Рі., 12:40
--- Р’РµСЂСЃРёСЏ СЃРµСЂРІРµСЂР°: 5.5.14
--- Р’РµСЂСЃРёСЏ PHP: 5.3.6
+-- Хост: localhost
+-- Время создания: Дек 05 2011 г., 16:26
+-- Версия сервера: 5.5.14
+-- Версия PHP: 5.3.6
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,41 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Р‘Р°Р·Р° РґР°РЅРЅС‹С…: `study`
+-- База данных: `study`
 --
 
 -- --------------------------------------------------------
 
 --
--- РЎС‚СЂСѓРєС‚СѓСЂР° С‚Р°Р±Р»РёС†С‹ `registration`
+-- Структура таблицы `articles`
+--
+
+CREATE TABLE IF NOT EXISTS `articles` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `author` varchar(50) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `text` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=64 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `article_id` int(10) NOT NULL,
+  `author` varchar(50) NOT NULL,
+  `text` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=40 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `registration`
 --
 
 CREATE TABLE IF NOT EXISTS `registration` (
@@ -32,10 +60,10 @@ CREATE TABLE IF NOT EXISTS `registration` (
   `password` varchar(32) NOT NULL,
   `access_level` varchar(5) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=74 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=76 ;
 
 --
--- Р”Р°РјРї РґР°РЅРЅС‹С… С‚Р°Р±Р»РёС†С‹ `registration`
+-- Дамп данных таблицы `registration`
 --
 
 INSERT INTO `registration` (`id`, `username`, `password`, `access_level`) VALUES
@@ -44,8 +72,7 @@ INSERT INTO `registration` (`id`, `username`, `password`, `access_level`) VALUES
 (69, 'second', '4c79451b7303d65d78a93aa0d17ae8e0', NULL),
 (70, 'thirdone', '4c79451b7303d65d78a93aa0d17ae8e0', NULL),
 (71, 'fourth', '4c79451b7303d65d78a93aa0d17ae8e0', NULL),
-(72, 'fifthone', '4c79451b7303d65d78a93aa0d17ae8e0', NULL),
-(73, 'onemore', '4c79451b7303d65d78a93aa0d17ae8e0', NULL);
+(72, 'fifthone', '4c79451b7303d65d78a93aa0d17ae8e0', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
