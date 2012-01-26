@@ -1,59 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<title>Add article</title>
+</head>
+
+<body>
+
 <?php
 
-session_start();
+include_once 'header.php';
 
-include 'db.php';
+?>
 
-if(isset($_SESSION['username']))
-{
-    $username = $_SESSION['username'];
-}
+    <div id="content">
 
-    if (!isset($username))
+    <?php
+
+    session_start();
+
+    include 'db.php';
+
+    if(isset($_SESSION['username']))
     {
-    header("location: index.php");
+        $username = $_SESSION['username'];
     }
 
-        if (isset($_POST['title'])) 
+        if (!isset($username))
         {
-            $title = trim($_POST['title']); 
-            if ($title == '') 
-            {
-                unset($title);
-            }  
+            header("location: index.php");
         }
 
-            if (isset($_POST['text'])) 
+            if (isset($_POST['title'])) 
             {
-                $arttext = $_POST['text'];
-                $text = wordwrap($arttext, 100, "\n", true); 
-                if ($text == '') 
+                $title = trim($_POST['title']); 
+                
+                if ($title == '') 
                 {
-                    unset($text);
+                    unset($title);
                 }  
             }
 
-if (isset($username) && isset($title) && isset($text))
-{
+                if (isset($_POST['text'])) 
+                {
+                    $arttext = $_POST['text'];
+                    $text = wordwrap($arttext, 100, "\n", true); 
+                    
+                    if ($text == '') 
+                    {
+                        unset($text);
+                    }  
+                }
 
-    $action = mysql_query ("INSERT INTO articles (author,title,text) 
-    VALUES ('$username','$title','$text')");
-
-    if ($action =='true') 
+    if (isset($username) && isset($title) && isset($text))
     {
-        echo "<h1>New article has been posted.</h1>";
-        header("Refresh: 3;url=index.php");
+
+        $action = mysql_query ("INSERT INTO articles (author,title,text) 
+        VALUES ('$username','$title','$text')");
+
+        if ($action =='true') 
+        {
+            echo "<h1>New article has been posted.</h1>";
+            header("Refresh: 3;url=index.php");
+        }
+
+        else 
+        {
+            echo "<h1>You've got a problem.</h1>";
+            header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
+        }
     }
 
     else 
     {
-        echo "<h1>You've got a problem.</h1>";
+        echo "<h1>You have to fill in all fields.</h1>";
         header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
     }
-}
 
-else 
-{
-    echo "<h1>You have to fill in all fields.</h1>";
-    header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
-}
+    ?>
+
+    </div>
+
+</body>
+
+</html>
