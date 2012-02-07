@@ -10,24 +10,15 @@
 
 <?php
 
-include_once 'header.php';
-
-?>
-
-<div id="content">
-
-<?php
-
 session_start();
 
 include 'db.php';
+include_once 'header.php';
+
+echo "<div id='content'>";
 
 if(isset($_SESSION['username']))
 {
-
-    $queryuser = mysql_query("SELECT * FROM registration WHERE 
-    username = '".$_SESSION["username"]."' ");
-    $userarray = mysql_fetch_assoc($queryuser);
 
     if ($userarray['access_level'] == 'boss')
     {
@@ -58,7 +49,7 @@ if(isset($_SESSION['username']))
             
                 if ($action =='true') 
                 {
-                    header("Location: manage_users.php");
+                    header("Location: $_SERVER[HTTP_REFERER]");
                 }
                 
                 else 

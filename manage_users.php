@@ -17,11 +17,7 @@ include_once 'header.php';
 
 if(isset($_SESSION['username']))
 {
-    include 'logout.php';
     echo "<div id='content'>";
-    $queryuser = mysql_query("SELECT * FROM registration WHERE 
-    username = '".$_SESSION["username"]."' ");
-    $userarray = mysql_fetch_assoc($queryuser);
 
     if ($userarray['access_level'] == 'boss')
     {

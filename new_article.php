@@ -15,15 +15,10 @@ session_start();
 include 'db.php';
 include_once 'header.php';
 
-if(isset($_SESSION['username']))
+if (!isset($_SESSION['username']))
 {
-    include 'logout.php';
+    header("location: index.php");
 }
-
-    if (!isset($_SESSION['username']))
-    {
-        header("location: index.php");
-    }
 
 ?>
 

@@ -1,32 +1,51 @@
 #header {
 	margin: 0 auto;
-	margin-top: 20px;
-	margin-bottom: 15px;
-	padding: 0;
+	margin-top: 10px;
 	width: 1000px;
-	height: 190px;
+	height: 154px;
     background: url(images/header.jpg) no-repeat;
 }
 
-#headerlink {
-    display: block;
+#menu {
+    background: url(images/menu.jpg) no-repeat;
     width: 1000px;
-    height: 190px;
-    background-image: url(images/header.jpg) no-repeat;
+    height: 36px;
+    margin: 0 auto;
+    font-family: Roman;
+}
+
+#menu  a {
+    color: #e5d803; 
+    text-decoration: none;
+    padding-left: 40px;
+}
+  
+#menu  a:hover {
+    color: #e00000; 
+    text-decoration: none;
+}
+
+.menu {
+    padding-top: 7px; 
+    text-align: center;
+}
+
+#logout {
+    float: right;       
+}
+
+.logout {
+    background: transparent;
+    border: none;
+    color: #100000;
+    font-family: Roman;
 }
 
 #content {
 	margin: 0 auto;
 	margin-top: 20px;
 	margin-bottom: 15px;
-	padding: 0;
 	width: 1000px;
-}
-
-#logout {
-    float:right;
-    margin-right: -5px;
-    margin-top: -222px;
 }
 
 .short_input {

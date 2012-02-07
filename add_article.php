@@ -10,77 +10,72 @@
 
 <?php
 
+session_start();
+
+include 'db.php';
 include_once 'header.php';
+    
+echo "<div id='content'>";
 
-?>
+if(isset($_SESSION['username']))
+{
+    $username = $_SESSION['username'];
+}
 
-    <div id="content">
-
-    <?php
-
-    session_start();
-
-    include 'db.php';
-
-    if(isset($_SESSION['username']))
+    if (!isset($username))
     {
-        $username = $_SESSION['username'];
+        header("location: index.php");
     }
 
-        if (!isset($username))
-        {
-            header("location: index.php");
-        }
-
-            if (isset($_POST['title'])) 
-            {
-                $title = trim($_POST['title']); 
+    if (isset($_POST['title'])) 
+    {
+        $title = trim($_POST['title']); 
                 
-                if ($title == '') 
+        if ($title == '') 
+        {
+            unset($title);
+        }  
+    }
+
+            if (isset($_POST['text'])) 
+            {
+                $arttext = $_POST['text'];
+                $text = wordwrap($arttext, 100, "\n", true); 
+                    
+                if ($text == '') 
                 {
-                    unset($title);
+                    unset($text);
                 }  
             }
 
-                if (isset($_POST['text'])) 
-                {
-                    $arttext = $_POST['text'];
-                    $text = wordwrap($arttext, 100, "\n", true); 
-                    
-                    if ($text == '') 
-                    {
-                        unset($text);
-                    }  
-                }
+if (isset($username) && isset($title) && isset($text))
+{
 
-    if (isset($username) && isset($title) && isset($text))
+    $action = mysql_query ("INSERT INTO articles (author,title,text) 
+    VALUES ('$username','$title','$text')");
+
+    if ($action =='true') 
     {
-
-        $action = mysql_query ("INSERT INTO articles (author,title,text) 
-        VALUES ('$username','$title','$text')");
-
-        if ($action =='true') 
-        {
-            echo "<h1>New article has been posted.</h1>";
-            header("Refresh: 3;url=index.php");
-        }
-
-        else 
-        {
-            echo "<h1>You've got a problem.</h1>";
-            header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
-        }
+        echo "<h1>New article has been posted.</h1>";
+        header("Refresh: 3;url=index.php");
     }
 
     else 
     {
-        echo "<h1>You have to fill in all fields.</h1>";
+        echo "<h1>You've got a problem.</h1>";
         header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
     }
+}
 
-    ?>
+else 
+{
+    echo "<h1>You have to fill in all fields.</h1>";
+    header("Refresh: 3;url=$_SERVER[HTTP_REFERER]");
+}
 
-    </div>
+?>
+
+</div>
 
 </body>
 

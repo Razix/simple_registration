@@ -10,17 +10,12 @@
 
 <?php
 
-include_once 'header.php';
-
-?>
-
-<div id="content">
-
-<?php
-
 session_start();
 
 include 'db.php';
+include_once 'header.php';
+
+echo "<div id='content'>";
 
 if (!isset($_POST['username']) && !isset($_POST['password']))
 {

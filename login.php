@@ -11,19 +11,12 @@
 <?php
 
 include_once 'header.php';
+echo "<div id='content'>";
+include 'login_form.php';
 
 ?>
 
-    <div id="content">
-
-    <?php
-
-        include 'login_form.php';
-
-    ?>
-
-
-    </div>
+</div>
     
 </body>
 

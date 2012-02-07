@@ -17,21 +17,8 @@ include_once 'header.php';
 
 if(isset($_SESSION['username']))
 {
-    include 'logout.php';
     echo "<div id='content'>";
     echo 'Hello, '.'<b>'.$_SESSION['username'].'</b>'.'.';
-    echo '<br>'.'<br>'.'<b>'."Now it's time to add <a href='new_article.php'>
-    new article</a>.".'</b>'.'<br>';
-    
-    $queryuser = mysql_query("SELECT * FROM registration WHERE 
-    username = '".$_SESSION["username"]."' ");
-    $userarray = mysql_fetch_assoc($queryuser);
-
-    if ($userarray['access_level'] == 'boss')
-    {
-        echo "<i>Here our administrator can <a href='manage_users.php'>
-        manage users</a>.</i>".'<br>';
-    }
 }
 
 else
